@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; }
+    h2 { text-align: center; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #aaa; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <h2>Relatório de Agendamentos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Procedimento</th>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ag in agendamentos %}
+      <tr>
+        <td>{{ ag.id }}</td>
+        <td>{{ ag.cliente.nome }}</td>
+        <td>{{ ag.procedimento.nome }}</td>
+        <td>{{ ag.data }}</td>
+        <td>{{ ag.hora }}</td>
+        <td>{{ ag.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

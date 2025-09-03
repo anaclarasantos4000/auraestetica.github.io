@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agendamentos - Aura Estética</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo/style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='img/logo-aura.png') }}" type="image/png" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-flex">
+      <div class="logo-container">
+        <img src="{{ url_for('static', filename='img/logoAura.png') }}" alt="Logo Aura Estética" class="logo-img" />
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="{{ url_for('inicio') }}">Início</a></li>
+          <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+          <li><a href="{{ url_for('agendamentos') }}" class="active">Agendamentos</a></li>
+          <li><a href="{{ url_for('clientes') }}">Clientes</a></li>
+          <li><a href="{{ url_for('procedimentos') }}">Procedimentos</a></li>
+          <li><a href="{{ url_for('relatorios') }}">Relatórios</a></li>
+          <li><a href="{{ url_for('profissionais') }}">Profissionais</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>{% if agendamento_edit %}Editar Agendamento{% else %}Novo Agendamento{% endif %}</h2>
+
+      <form method="POST" action="{{ url_for('agendamentos') }}" class="filter-form">
+        {% if agendamento_edit %}
+          <input type="hidden" name="id" value="{{ agendamento_edit.id }}">
+        {% endif %}
+
+        <select name="cliente" required>
+          <option disabled {% if not agendamento_edit %}selected{% endif %}>Escolha o cliente</option>
+          {% for c in clientes %}
+            <option value="{{ c.id }}" {% if agendamento_edit and c.id == agendamento_edit.cliente_id %}selected{% endif %}>{{ c.nome }}</option>
+          {% endfor %}
+        </select>
+
+        <select name="procedimento" required>
+          <option disabled {% if not agendamento_edit %}selected{% endif %}>Escolha o procedimento</option>
+          {% for p in procedimentos %}
+            <option value="{{ p.id }}" {% if agendamento_edit and p.id == agendamento_edit.procedimento_id %}selected{% endif %}>{{ p.nome }}</option>
+          {% endfor %}
+        </select>
+
+        <select name="tipo_consulta" required>
+          <option disabled {% if not agendamento_edit %}selected{% endif %}>Escolha o tipo de consulta</option>
+          {% set tipos = ["Consulta de Avaliação Estética", "Consulta de Acompanhamento", "Consulta Específica para Procedimento"] %}
+          {% for tipo in tipos %}
+            <option value="{{ tipo }}" {% if agendamento_edit and tipo == agendamento_edit.tipo_consulta %}selected{% endif %}>{{ tipo }}</option>
+          {% endfor %}
+        </select>
+
+        <textarea name="descricao" class="form-textarea" required placeholder="Descrição detalhada da consulta (Ex: Anamnese, Exame Físico, etc)">{{ agendamento_edit.descricao if agendamento_edit else '' }}</textarea>
+
+        <select name="profissional" required>
+          <option disabled {% if not agendamento_edit %}selected{% endif %}>Escolha o profissional</option>
+          {% for p in profissionais %}
+            <option value="{{ p.id }}" {% if agendamento_edit and p.id == agendamento_edit.profissional_id %}selected{% endif %}>{{ p.nome }}</option>
+          {% endfor %}
+        </select>
+
+        <input type="date" name="data" value="{{ agendamento_edit.data if agendamento_edit else '' }}" required>
+        <input type="time" name="hora" value="{{ agendamento_edit.hora if agendamento_edit else '' }}" required>
+
+        <button type="submit" class="btn-novo-agendamento">
+          {% if agendamento_edit %}Salvar Alterações{% else %}+ Novo Agendamento{% endif %}
+        </button>
+      </form>
+
+      <div class="agendamentos-lista">
+        {% for ag in agendamentos %}
+        <div class="agendamento">
+          <p><strong>Cliente:</strong> {{ ag.cliente.nome }}</p>
+          <p><strong>Procedimento:</strong> {{ ag.procedimento.nome }}</p>
+          <p><strong>Tipo:</strong> {{ ag.tipo_consulta }}</p>
+          <p><strong>Descrição:</strong> {{ ag.descricao }}</p>
+          <p><strong>Profissional:</strong> {{ ag.profissional.nome }}</p>
+          <p><strong>Data:</strong> {{ ag.data }} às {{ ag.hora }}</p>
+          <p><strong>Status:</strong> <span class="status {{ ag.status|lower }}">{{ ag.status }}</span></p>
+
+          <form method="POST" action="{{ url_for('alterar_status_agendamento', agendamento_id=ag.id) }}">
+            <div class="agendamento-botoes">
+              {% if ag.status == "Pendente" %}
+                <button name="acao" value="confirmar" class="btn-confirmar">Confirmar</button>
+                <button name="acao" value="cancelar" class="btn-cancelar">Cancelar</button>
+                <a href="{{ url_for('editar_agendamento', id=ag.id) }}" class="btn-reagendar">Reagendar</a>
+              {% elif ag.status == "Confirmado" %}
+                <button name="acao" value="concluir" class="btn-concluir">Concluir</button>
+                <a href="{{ url_for('editar_agendamento', id=ag.id) }}" class="btn-reagendar">Reagendar</a>
+                <button name="acao" value="cancelar" class="btn-cancelar">Cancelar</button>
+              {% endif %}
+            </div>
+          </form>
+        </div>
+        {% else %}
+          <p>Nenhum agendamento registrado.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Aura Estética. Sistema interno para gestão de agendamentos.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

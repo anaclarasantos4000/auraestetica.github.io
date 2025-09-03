@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- Documento HTML com idioma pt-br -->
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Responsivo para funcionar bem em celulares e desktops -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatórios - Aura Estética</title>
+  <!-- Link para o CSS principal -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo/style.css') }}" />
+  <!-- Ícone na aba do navegador -->
+  <link rel="icon" href="{{ url_for('static', filename='img/logo-aura.png') }}" type="image/png" />
+</head>
+<body>
+  <!-- Cabeçalho com logo e menu -->
+  <header class="header">
+    <div class="container header-flex">
+      <div class="logo-container">
+        <!-- Logo da clínica -->
+        <img src="{{ url_for('static', filename='img/logoAura.png') }}" alt="Logo Aura Estética" class="logo-img">
+      </div>
+      <nav class="nav">
+        <ul>
+          <!-- Menu de navegação com link ativo na página atual -->
+          <li><a href="{{ url_for('inicio') }}">Início</a></li>
+          <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+          <li><a href="{{ url_for('agendamentos') }}">Agendamentos</a></li>
+          <li><a href="{{ url_for('clientes') }}">Clientes</a></li>
+          <li><a href="{{ url_for('procedimentos') }}">Procedimentos</a></li>
+          <li><a href="{{ url_for('relatorios') }}" class="active">Relatórios</a></li>
+          <li><a href="{{ url_for('profissionais') }}">Profissionais</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>Relatório de Agendamentos</h2>
+
+      <!-- Verifico se tem agendamentos para mostrar -->
+      {% if agendamentos %}
+      <!-- Tabela simples para exibir os agendamentos -->
+      <table style="width: 100%; border-collapse: collapse; margin-top: 2rem;">
+        <thead>
+          <tr style="background-color: #f0f0f0;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Cliente</th>
+            <th style="padding: 10px;">Procedimento</th>
+            <th style="padding: 10px;">Data</th>
+            <th style="padding: 10px;">Hora</th>
+            <th style="padding: 10px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Mostro cada agendamento na tabela -->
+          {% for ag in agendamentos %}
+          <tr>
+            <td style="padding: 8px;">{{ ag.id }}</td>
+            <td style="padding: 8px;">{{ ag.cliente.nome }}</td>
+            <td style="padding: 8px;">{{ ag.procedimento.nome }}</td>
+            <td style="padding: 8px;">{{ ag.data }}</td>
+            <td style="padding: 8px;">{{ ag.hora }}</td>
+            <td style="padding: 8px;">{{ ag.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <!-- Mensagem caso não tenha agendamento registrado -->
+      <p style="margin-top: 2rem;">Nenhum agendamento registrado.</p>
+      {% endif %}
+
+      <!-- Botão para exportar os relatórios em PDF -->
+      <form action="{{ url_for('exportar_pdf') }}" method="POST">
+        <button type="submit" class="btn-exportar">Exportar PDF</button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- Rodapé padrão com direitos autorais -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Aura Estética. Sistema interno para gestão de relatórios.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

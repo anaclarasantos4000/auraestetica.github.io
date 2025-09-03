@@ -1,0 +1,64 @@
+<!-- templates/inicio.html -->
+<!DOCTYPE html>
+<!-- Começo do HTML, já defino que o idioma da página é português do Brasil -->
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Garante que acentos e caracteres especiais funcionem certinho -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Faz o site se adaptar bem no celular e em outras telas pequenas -->
+  <title>Aura Estética - Início</title>
+  <!-- Link pro CSS que está na pasta static/estilo -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo/style.css') }}">
+  <!-- Ícone que aparece na aba do navegador -->
+  <link rel="icon" href="{{ url_for('static', filename='img/logo-aura.png') }}" type="image/png" />
+</head>
+<body>
+  <!-- Cabeçalho fixo com o logo e o menu de navegação -->
+  <header class="header">
+    <div class="container header-flex">
+      <div class="logo-container">
+        <!-- Logo principal da clínica -->
+        <img src="{{ url_for('static', filename='img/logoAura.png') }}" alt="Logo Aura Estética" class="logo-img">
+      </div>
+      <nav class="nav">
+        <ul>
+          <!-- Links para as outras páginas do sistema -->
+          <li><a href="{{ url_for('inicio') }}" class="active">Início</a></li>
+          <li><a href="{{ url_for('dashboard') }}" >Dashboard</a></li>
+          <li><a href="{{ url_for('agendamentos') }}">Agendamentos</a></li>
+          <li><a href="{{ url_for('clientes') }}">Clientes</a></li>
+          <li><a href="{{ url_for('procedimentos') }}">Procedimentos</a></li>
+          <li><a href="{{ url_for('relatorios') }}">Relatórios</a></li>
+          <li><a href="{{ url_for('profissionais') }}">Profissionais</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção principal com mensagem de boas-vindas -->
+  <section class="hero-inicio">
+    <div class="hero-background">
+      <!-- Uma sobreposição escura pra dar contraste ao texto -->
+      <div class="hero-overlay">
+        <div class="container">
+          <h2>Bem-vindo(a) à Aura Estética</h2>
+          <!-- Pequena introdução explicando a proposta do sistema -->
+          <p class="intro">
+            Cuidado, bem-estar e estética com sofisticação. Esta é a nossa essência.
+            Utilize nosso sistema para acessar os agendamentos, controlar os atendimentos e oferecer a melhor experiência às nossas clientes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé da página com uma mensagem final carinhosa -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Aura Estética. Sistema interno de gestão com amor e cuidado.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

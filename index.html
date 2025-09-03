@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- Defino o tipo de documento como HTML5 -->
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <!-- Defino o conjunto de caracteres como UTF-8 pra aceitar acentuação -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Isso aqui garante que a página fique responsiva em diferentes dispositivos -->
+  <title>Dashboard - Aura Estética</title>
+  <!-- Linko meu arquivo CSS que está na pasta static/estilo -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo/style.css') }}">
+  <!-- Coloco o ícone que aparece na aba do navegador -->
+  <link rel="icon" href="{{ url_for('static', filename='img/logo-aura.png') }}" type="image/png">
+</head>
+<body>
+  <!-- Cabeçalho com o menu de navegação -->
+  <header class="header">
+    <div class="container header-flex">
+      <div class="logo-container">
+        <!-- Exibo a logo do sistema no topo -->
+        <img src="{{ url_for('static', filename='img/logoAura.png') }}" alt="Logo Aura Estética" class="logo-img">
+      </div>
+      <!-- Menu principal do sistema com os links das páginas -->
+      <nav class="nav">
+        <ul>
+          <li><a href="{{ url_for('inicio') }}" >Início</a></li>
+          <li><a href="{{ url_for('dashboard') }}" class="active">Dashboard</a></li>
+          <li><a href="{{ url_for('agendamentos') }}">Agendamentos</a></li>
+          <li><a href="{{ url_for('clientes') }}">Clientes</a></li>
+          <li><a href="{{ url_for('procedimentos') }}">Procedimentos</a></li>
+          <li><a href="{{ url_for('relatorios') }}">Relatórios</a></li>
+          <li><a href="{{ url_for('profissionais') }}">Profissionais</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção principal da página -->
+  <section class="section">
+    <div class="container">
+      <h2>Painel Administrativo</h2>
+
+      <!-- Cartões com informações gerais do sistema -->
+      <div class="dashboard-cards">
+        <div class="card">
+          <!-- Link para a página de clientes e exibe a quantidade cadastrada -->
+          <h3><a href="{{ url_for('clientes') }}">Total de Clientes</a></h3>
+          <p><strong>{{ total_clientes }}</strong> cadastrados</p>
+        </div>
+        <div class="card">
+          <!-- Link para os procedimentos com o número total -->
+          <h3><a href="{{ url_for('procedimentos') }}">Procedimentos Cadastrados</a></h3>
+          <p><strong>{{ total_procedimentos }}</strong> tipos registrados</p>
+        </div>
+      </div>
+
+      <!-- Listagem dos agendamentos do dia -->
+      <h2 style="margin-top: 4rem;">Agendamentos do Dia</h2>
+      {% if agendamentos_hoje %}
+      <div class="agendamentos-hoje">
+        <!-- Percorro todos os agendamentos do dia e mostro os dados principais -->
+        {% for ag in agendamentos_hoje %}
+        <div class="agendamento">
+          <p><strong>Cliente:</strong> {{ ag.cliente.nome }}</p>
+          <p><strong>Horário:</strong> {{ ag.hora }}</p>
+          <p><strong>Procedimento:</strong> {{ ag.procedimento.nome }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <!-- Caso não tenha nenhum agendamento, exibo uma mensagem amigável -->
+      <p style="text-align: center; color: gray;">Nenhum agendamento para hoje.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Rodapé da página com créditos -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Aura Estética. Sistema interno de gestão com amor e cuidado.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
