@@ -1,0 +1,473 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Nunito:wght@300;400;600&display=swap');
+
+/* Definição das cores usadas no projeto para manter a consistência */
+:root {
+  --verde-oliva: #738063;
+  --rosa-claro: #DBC3CB;
+  --rosado: #DCC3D4; /* Corrigi o valor inválido para um tom rosado válido */
+  --areia: #D6CEC0;
+  --fundo-claro: #EAE6E3;
+  --cinza-neutro: #989187;
+  --texto-escuro: #2e2e2e;
+  --branco: #ffffff;
+  --sombra: rgba(0, 0, 0, 0.05);
+}
+
+/* Reset básico e estrutura do html e body para garantir altura total */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Corpo da página com fonte principal, cor de fundo e layout flexível em coluna */
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--fundo-claro);
+  color: var(--texto-escuro);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Defino as fontes das headings principais e a cor delas */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--verde-oliva);
+}
+
+/* Container centralizado com largura máxima e espaçamento */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Estilização do header com cor verde oliva e texto branco */
+.header {
+  background-color: var(--verde-oliva);
+  color: var(--branco);
+  padding: 2rem 0 1.5rem 0;
+  text-align: center;
+}
+
+/* Menu de navegação estilo flex, sem marcadores, com espaçamento entre os itens */
+.nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  color: #D6CEC0;
+}
+
+/* Links do menu com cor branca e sem sublinhado */
+.nav a {
+  text-decoration: none;
+  color: var(--branco);
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+/* Hover e link ativo ficam sublinhados para dar destaque */
+.nav a:hover,
+.nav .active {
+  text-decoration: underline;
+}
+
+/* Seção principal com padding e fundo claro */
+.section {
+  padding: 4rem 1rem;
+  background-color: var(--fundo-claro);
+}
+
+/* Título da seção com margem, tamanho, alinhamento e uma borda inferior para separar */
+h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  border-bottom: 2px solid var(--areia);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+/* Cards do dashboard organizados em flex, com espaçamento e quebra de linha */
+.dashboard-cards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Estilo básico dos cards com fundo branco, sombra leve, borda arredondada e texto centralizado */
+.card {
+  flex: 1 1 250px;
+  background-color: var(--branco);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px var(--sombra);
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--verde-oliva);
+  font-weight: 600;
+}
+
+/* Formulário de filtro com flex para ficar responsivo e espaçamento entre campos */
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  justify-content: center;
+}
+
+/* Inputs, selects e botões do formulário com padding, borda arredondada e fonte consistente */
+.filter-form input,
+.filter-form select,
+.filter-form button {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--cinza-neutro);
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Textarea do formulário com largura maior, altura mínima e resize vertical */
+.filter-form textarea,
+.form-textarea {
+  width: 90%;
+  min-height: 120px;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--cinza-neutro);
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* Botão do formulário com cor verde oliva e texto branco, muda no hover */
+.filter-form button {
+  background-color: var(--verde-oliva);
+  color: var(--branco);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-form button:hover {
+  background-color: var(--cinza-neutro);
+}
+
+/* Lista de agendamentos em coluna com espaçamento */
+.agendamentos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Cada agendamento com fundo degrade, borda esquerda verde, sombra leve e transição suave */
+.agendamento  {
+  background: linear-gradient(to right, #fdfdfd, #f5f5f5);
+  border-left: 5px solid var(--verde-oliva);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+/* Efeito de elevação no hover para dar mais vida à interação */
+.agendamento:hover {
+  transform: translateY(-3px);
+}
+
+/* Parágrafos dentro dos agendamentos com espaçamento e tamanho legível */
+.agendamento p {
+  font-size: 1.05rem;
+  margin: 0.5rem 0;
+}
+
+/* Botões dentro dos agendamentos com margem para separar */
+.agendamento button {
+  margin-top: 1rem;
+}
+
+/* Container dos botões alinhados lado a lado com espaçamento */
+.agendamento-botoes {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* Botão principal para novo agendamento com verde e estilo consistente */
+.btn-novo-agendamento {
+  background-color: var(--verde-oliva);
+  color: var(--branco);
+  padding: 0.75rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.btn-novo-agendamento:hover {
+  background-color: var(--cinza-neutro);
+}
+
+/* Estilos para os diferentes status com cores e peso para facilitar identificação */
+.status.pendente {
+  background-color: #ffdf87;
+  color: #4a3e1d;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.status.confirmado {
+  color: rgb(2, 83, 39);
+  font-weight: bold;
+}
+
+.status.cancelado {
+  background-color: #e6a8a1;
+  color: #5a2d29;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Botão de cancelar com tom avermelhado para sinalizar ação */
+.btn-cancelar {
+  background-color: #e6a8a1;
+  color: #5a2d29;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-cancelar:hover {
+  background-color: #c57269;
+}
+
+/* Botão de confirmar com verde mais claro */
+.btn-confirmar {
+  color: #0c3813;
+  background-color: #83c597;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-confirmar:hover {
+  background-color: #51805f;
+}
+
+/* Botão para concluir agendamento, verde escuro */
+.btn-concluir {
+  background-color: var(--verde-oliva);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-concluir:hover {
+  background-color: #4f5c45;
+}
+
+/* Botões mais claros para confirmar, adicionar e exportar, com hover rosado */
+.btn-confirmar,
+.btn-adicionar,
+.btn-exportar {
+  background-color: var(--rosa-claro);
+  color: var(--branco);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  font-family: 'Nunito', sans-serif;
+}
+
+.btn-confirmar:hover,
+.btn-adicionar:hover,
+.btn-exportar:hover {
+  background-color: var(--rosado);
+}
+/* Botão Editar procedimento */
+.btn-editar {
+  background-color: var(--rosa-claro); /* rosa claro do projeto */
+  color: var(--branco);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.btn-editar:hover {
+  background-color: var(--rosado);
+  color: var(--branco);
+  text-decoration: none;
+}
+
+/* Botão Excluir procedimento */
+.btn-excluir {
+  background-color: #dc3545; /* vermelho típico de exclusão */
+  color: var(--branco);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.btn-excluir:hover {
+  background-color: #a71d2a; /* vermelho escuro para hover */
+}
+
+/* Ajuste para alinhar botões lado a lado, se precisar */
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.btn-reagendar {
+  background-color: #d6cec0; /* areia clara */
+  color: #2e2e2e; /* texto escuro */
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.95rem;
+}
+
+.btn-reagendar:hover {
+  background-color: #c8bfb3; /* areia um pouco mais escura */
+  color: #2e2e2e;
+  text-decoration: none;
+}
+
+.footer {
+  background-color: var(--verde-oliva); /* mesma cor do header */
+  color: var(--branco); /* cor do texto branca para contraste */
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 1rem;
+  margin-top: 4rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Responsividade para telas pequenas: menu vertical, cards e formulários empilhados */
+@media (max-width: 768px) {
+  .nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .dashboard-cards {
+    flex-direction: column;
+  }
+  .filter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .img-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-inicio {
+    min-height: calc(70vh - 4rem);
+    padding: 0 1rem;
+  }
+  .hero-inicio h2 {
+    font-size: 2rem;
+  }
+  .hero-inicio .intro {
+    font-size: 1rem;
+  }
+  /* Ajuste do logo para ficar menor na responsividade */
+  .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Ajustes gerais para a logo */
+.logo-img {
+  width: auto;
+  height: 48px;
+  object-fit: contain;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* Hero da página inicial com imagem de fundo escurecida e texto centralizado */
+.hero-inicio {
+  position: relative;
+  min-height: calc(100vh - 4rem);
+  width: 100%;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    url('../img/faixadaAura.png') no-repeat center center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--branco);
+  text-align: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.hero-inicio .container {
+  max-width: 900px;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-inicio h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-inicio .intro {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+}
+

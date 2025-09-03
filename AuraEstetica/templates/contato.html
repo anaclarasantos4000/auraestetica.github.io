@@ -1,0 +1,20 @@
+{% extends 'inicio.html' %}
+{% block content %}
+<div class="container">
+  <h1>Contato</h1>
+  <form method="POST">
+    <label>Nome</label>
+    <input type="text" name="nome" required>
+    <label>E-mail</label>
+    <input type="email" name="email" required>
+    <label>Assunto</label>
+    <input type="text" name="assunto" required>
+    <label>Mensagem</label>
+    <textarea name="mensagem" rows="5" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+  {% if sucesso %}
+    <p>Mensagem enviada com sucesso!</p>
+  {% endif %}
+</div>
+{% endblock %}
